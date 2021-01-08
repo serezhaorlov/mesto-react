@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PopupWithForm({isOpened, namePopup, onCloseOverlay, nameForm, heading, title, children, buttonStyle, button, buttonLoad, onClose}) {
+function PopupWithForm({ isOpened, namePopup, onCloseOverlay, nameForm, heading, title, buttonStyle, button, buttonLoad, onClose, children}) {
   return (
     <section className={isOpened ? `${namePopup} popup_is-opened` : namePopup} onClick={onCloseOverlay}> 
       <form id="form" className={nameForm} name="form" noValidate>

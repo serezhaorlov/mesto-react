@@ -9,7 +9,7 @@ import { api } from './utils/api.js';
 import './index.css';
 
 function App () {
-  const [isEditAvatarPopupOpen, setStateAvatar] = React.useState(false); 
+  const [isEditAvatarPopupOpen, setStateAvatar] = React.useState(false);  
   const [isEditProfilePopupOpen, setStateProfile] = React.useState(false);
   const [isAddPlacePopupOpen, setStateAddPlace] = React.useState(false);
 
@@ -20,7 +20,7 @@ function App () {
   const [selectedCard, setSelectedCard] = React.useState(false);
 
   const [cards, setCards] = React.useState([]);
-  console.log(cards);
+
   React.useEffect(()=> {
     api.getUser()
     .then((profile)=>{
@@ -81,38 +81,32 @@ function App () {
             userDescription = {userDescription}
             userAvatar = {userAvatar}
 
-            cards={cards} // массив с карточками
+            cards={cards}
             onCardClick={handleCardClick}
           />
           <Footer />
-          <PopupWithForm namePopup="popup" nameForm="form" title="Редактировать профиль" children= 
-            {
-                <>
+          <PopupWithForm namePopup="popup" nameForm="form" title="Редактировать профиль" button="Сохранить" buttonLoad="Сохранение..." isOpened = {isEditProfilePopupOpen} onClose = {closeAllPopups} onCloseOverlay = {closeAllPopupsOverlay}>
+              <>
                 <input type="text" required minLength={2} maxLength={40} id="name" name="name" placeholder="Имя" className="form__name form__name_top" />
                 <span id="name-error" className="form__error" />
                 <input type="text" required minLength={2} maxLength={200} id="about" name="about" placeholder="О себе" className="form__name form__name_bottom" />
                 <span id="about-error" className="form__error" />
-                </>
-            }
-          button="Сохранить" buttonLoad="Сохранение..." isOpened = {isEditProfilePopupOpen} onClose = {closeAllPopups} onCloseOverlay = {closeAllPopupsOverlay}/>  
-          <PopupWithForm namePopup="popup popup-add" nameForm="form form-add" title="Новое место" children= 
-            {
-                <>
+              </>
+          </PopupWithForm>
+          <PopupWithForm namePopup="popup popup-add" nameForm="form form-add" title="Новое место" button="Сохранить" buttonLoad="Сохранение..." isOpened = {isAddPlacePopupOpen} onClose = {closeAllPopups} onCloseOverlay = {closeAllPopupsOverlay}>
+              <>
                 <input type="text" required minLength={2} maxLength={30} id="nameadd" name="name" placeholder="Название" className="form__name form__name_top_add-name" />
                 <span id="nameadd-error" className="form__error" />
                 <input type="url" required minLength={8} id="url" name="url" placeholder="Ссылка на картинку" className="form__name form__name_bottom_add-place" />
                 <span id="url-error" className="form__error" />
-                </> 
-            } 
-          button="Сохранить" buttonLoad="Сохранение..." isOpened = {isAddPlacePopupOpen} onClose = {closeAllPopups} onCloseOverlay = {closeAllPopupsOverlay}/>
-          <PopupWithForm namePopup="popup popup-profile" nameForm="form form-profile" title="Обновить аватар" children= 
-            {
-                <>
+              </> 
+          </PopupWithForm>
+          <PopupWithForm namePopup="popup popup-profile" nameForm="form form-profile" title="Обновить аватар" button="Сохранить" buttonLoad="Сохранение..." heading="form__heading_profile" isOpened = {isEditAvatarPopupOpen} onClose = {closeAllPopups} onCloseOverlay = {closeAllPopupsOverlay}>
+              <>
                 <input type="url" required minLength={8} id="url" name="avatar" placeholder="Введите ссылку" className="form__name form__name_profile" />
                 <span id="url-error" className="form__error" />
-                </>
-            }
-           button="Сохранить" buttonLoad="Сохранение..." heading="form__heading_profile" isOpened = {isEditAvatarPopupOpen} onClose = {closeAllPopups} onCloseOverlay = {closeAllPopupsOverlay}/>
+              </>
+          </PopupWithForm>
           <PopupWithForm namePopup="popup popup-delete" nameForm="form form-delete" title="Вы уверены?" heading="form__heading_delete-form"
           button="Да" buttonLoad="..." buttonStyle="form__button_delete-form" onClose = {closeAllPopups} 
           />
