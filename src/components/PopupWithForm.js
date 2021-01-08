@@ -1,8 +1,15 @@
 import React from 'react';
 
-function PopupWithForm({ isOpened, namePopup, onCloseOverlay, nameForm, heading, title, buttonStyle, button, buttonLoad, onClose, children}) {
+function PopupWithForm({ isOpened, namePopup, nameForm, heading, title, buttonStyle, button, buttonLoad, onClose, children}) {
+
+  const closeAllPopupsOverlay = (evt) => { //а может ее прсото сделать в utils и прокинуть через импорт?
+    if (evt.target === evt.currentTarget){
+      onClose()
+    }
+  }
+
   return (
-    <section className={isOpened ? `${namePopup} popup_is-opened` : namePopup} onClick={onCloseOverlay}> 
+    <section className={isOpened ? `${namePopup} popup_is-opened` : namePopup} onClick={closeAllPopupsOverlay}> 
       <form id="form" className={nameForm} name="form" noValidate>
         <h2 className={`form__heading ${heading}`}>{title}</h2>
         {children}
@@ -13,5 +20,6 @@ function PopupWithForm({ isOpened, namePopup, onCloseOverlay, nameForm, heading,
     </section>
   )
 } 
+
 
 export default PopupWithForm;

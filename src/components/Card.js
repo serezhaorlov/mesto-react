@@ -18,4 +18,5 @@ function Card ({card, onCardClick}) {
     )
 }
 
+
 export default Card;

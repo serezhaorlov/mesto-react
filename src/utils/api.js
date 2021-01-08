@@ -1,5 +1,6 @@
-import {apiObj} from './utils.js'
-export class Api {
+import { apiObj } from './utils.js'
+
+class Api {
   constructor(options) {
     this._cardsUrl = options.cardsUrl;
     this._myProfileUrl = options.myProfileUrl;
