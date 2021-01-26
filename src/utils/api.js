@@ -41,9 +41,7 @@ class Api {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-18/users/me/avatar', {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
-        avatar: data
-      })
+      body: JSON.stringify(data)
     }).then((res) => {
       if (res.ok) {
         return res.json()
@@ -65,13 +63,12 @@ class Api {
   }
 
   addCard(data){
+    console.log(data)
+
     return fetch(this._cardsUrl, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({
-        name: data.name,
-        link: data.url
-      })
+      body: JSON.stringify(data)
     }).then((res) => {
       if (res.ok) {
         return res.json()
@@ -92,8 +89,9 @@ class Api {
       })
   }
 
-  likeCard(cardId){
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-18/cards/likes/${cardId}`, {
+  likesChanges(cardId, isLiked) { 
+    if (isLiked) {
+      return fetch(`https://mesto.nomoreparties.co/v1/cohort-18/cards/likes/${cardId}`, {
       method: 'PUT',
       headers: this._headers,
     }).then((res) => {
@@ -102,18 +100,18 @@ class Api {
       }
       return Promise.reject("Mistakes there made")
       })
-  }
-
-  dislikeCard(cardId){
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-18/cards/likes/${cardId}`, {
-      method: 'DELETE',
-      headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject("Mistakes there made")
-      })
+    } 
+    if (!isLiked){
+      return fetch(`https://mesto.nomoreparties.co/v1/cohort-18/cards/likes/${cardId}`, {
+        method: 'DELETE',
+        headers: this._headers,
+      }).then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject("Mistakes there made")
+        })
+    }
   }
 
 

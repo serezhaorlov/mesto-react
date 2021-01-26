@@ -13,11 +13,7 @@
   opacity: .6;
 }
 
-.elements__like-button:active {
-  outline: none;
-  transform: scale(1.2);
-  transition: all 0.3s ease-out;
-}
+
 
 .elements__like-button:focus {
   outline: none;
