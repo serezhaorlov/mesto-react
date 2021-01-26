@@ -12,7 +12,6 @@ function DeleteCardPopupOpen ({onClose, isOpened, handleCardDelete, cardToDelete
     const deleteCard = (evt) => {
         evt.preventDefault()
         handleCardDelete(cardToDelete)
-        onClose()
     }
           
     return (

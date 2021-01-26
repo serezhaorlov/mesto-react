@@ -43,6 +43,7 @@ function App () {
       api.deleteCard(card._id, isOwner)
           .then((deletedCard) => {
             setCards(cards.filter(c => c._id !== card._id, console.log(deletedCard))) /* вывожу сообщение в консоль */
+            closeAllPopups()
           }).catch((err)=>{
             console.log(err)
           });
