@@ -1,8 +1,8 @@
 import React from 'react';
 
-function PopupWithImage ({ namePopup, card, onClose }){
-
-  const { name, link } = card;
+function ImagePopup ({ namePopup, card, onClose }){
+  console.log(card)
+  const { name, link } = card;  
 
   const closeAllPopupsOverlay = (evt) => {
        if (evt.target === evt.currentTarget){
@@ -11,7 +11,7 @@ function PopupWithImage ({ namePopup, card, onClose }){
     }
 
   return (
-    <section className={card ? `${ namePopup } popup_is-opened` : namePopup } onClick={ closeAllPopupsOverlay }> 
+    <section className={card.link !== '' ? `${ namePopup } popup_is-opened` : namePopup } onClick={ closeAllPopupsOverlay }> 
       <div className="popup-pic__content-container">
         <button id="button-close" type="button" className="popup-pic__close-button-pic" onClick={ onClose }/>
         <img src={ link } alt={ name } className="popup-pic__image"/>
@@ -22,4 +22,4 @@ function PopupWithImage ({ namePopup, card, onClose }){
 }
 
 
-export default PopupWithImage;
+export default ImagePopup;

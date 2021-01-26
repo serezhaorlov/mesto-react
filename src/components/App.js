@@ -6,7 +6,7 @@ import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import DeleteCardPopupOpen from './DeleteCardPopupOpen.js';
-import PopupWithImage from './PopupWithImage.js';
+import ImagePopup from './ImagePopup.js'
 import { api } from '../utils/api.js';
 import { CurrentUserContext } from '../contexts/CurrenUserContext.js';
 import { CardContext } from '../contexts/CardContext.js';
@@ -21,7 +21,7 @@ function App () {
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-  const [selectedCard, setSelectedCard] = React.useState(''); // вот здесь не совсем понятно, по идее начальный стейт должен быть объектом, но если я ставлю объект пустой, то открывается попап без всего, если не задавать стейт, то будет ошибка(
+  const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''}); //
 
   const [cardToDelete, setCardToDelete] = React.useState({})// стейт для удаления карточки из попапа с подтверждением удаления
 
@@ -32,15 +32,19 @@ function App () {
         .then((newCard) => {
           const newCards = cards.map((c) => c._id === card._id ? newCard : c);
           setCards(newCards);
+        }).catch((err)=>{
+          console.log(err)
         });
   } 
 
-  function handleCardDelete(card) {
+  function handleCardDelete(card) { //переместить в deletePopup
       const isOwner = card.owner._id === currentUser._id; //
       
       api.deleteCard(card._id, isOwner)
           .then((deletedCard) => {
             setCards(cards.filter(c => c._id !== card._id, console.log(deletedCard))) /* вывожу сообщение в консоль */
+          }).catch((err)=>{
+            console.log(err)
           });
   } 
 
@@ -118,7 +122,7 @@ function App () {
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setIsDeleteCardPopupOpen(false)
-    setSelectedCard(false)
+    setSelectedCard({name: '', link: ''})
   }
 
   return (
@@ -142,7 +146,7 @@ function App () {
             <AddPlacePopup isOpened = { isAddPlacePopupOpen } onClose = { closeAllPopups } onAddCard = { handleAddPlaceSubmit }/>
             <EditAvatarPopup isOpened = { isEditAvatarPopupOpen } onClose = { closeAllPopups } onUpdateAvatar={ handeUpdateAvatar }/>
             <DeleteCardPopupOpen isOpened = { isDeleteCardPopupOpen } onClose = { closeAllPopups } handleCardDelete={ handleCardDelete } cardToDelete={ cardToDelete }/>
-            <PopupWithImage namePopup="popup popup-pic" card={selectedCard} onClose = { closeAllPopups } />
+            <ImagePopup namePopup="popup popup-pic" card={ selectedCard } onClose = { closeAllPopups } />
             
           </CardContext.Provider>
         </CurrentUserContext.Provider>
