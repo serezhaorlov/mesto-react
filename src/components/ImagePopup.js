@@ -1,7 +1,6 @@
 import React from 'react';
 
 function ImagePopup ({ namePopup, card, onClose }){
-  console.log(card)
   const { name, link } = card;  
 
   const closeAllPopupsOverlay = (evt) => {

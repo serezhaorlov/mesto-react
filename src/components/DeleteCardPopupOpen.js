@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm.js';
 
-function DeleteCardPopupOpen ({onClose, isOpened, handleCardDelete, cardToDelete}) {
+function DeleteCardPopupOpen ({ onClose, isOpened, handleCardDelete, cardToDelete }) {
 
     const closeAllPopupsOverlay = (evt) => { 
         if (evt.target === evt.currentTarget){

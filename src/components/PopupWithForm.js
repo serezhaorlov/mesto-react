@@ -5,7 +5,7 @@ function PopupWithForm({ isOpened, namePopup, nameForm, heading, title, buttonSt
 
     return (
     <section className={ isOpened ? `${ namePopup } popup_is-opened` : namePopup } onClick={ closeAllPopupsOverlay }> 
-      <form id="form" className={ nameForm } name="form" onSubmit={ onSubmit } noValidate>
+      <form id="form" className={ nameForm } name="form" onSubmit={ onSubmit }>
         <h2 className={`form__heading ${ heading }`}>{ title }</h2>
         { children }
         <button type="submit" id="submit-button" value="Сохранить" className={`form__button ${ buttonStyle }`}>{ button }</button>
